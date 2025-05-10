@@ -1,0 +1,26 @@
+name: wtms
+description: "A Worker Task Management System (WTMS) Flutter app."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.4.0             # For HTTP requests to communicate with your backend
+  shared_preferences: ^2.0.15 # For storing user credentials and session data
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0      # Linting for maintaining coding standards
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/worker_icon.jpeg
+    - assets/images/main_image.jpeg
+    - assets/images/logo.jpeg
+
