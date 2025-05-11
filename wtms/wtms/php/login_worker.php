@@ -45,10 +45,12 @@ if ($result->num_rows > 0) {
         );
         sendJsonResponse($response);
     } else {
-        $response = array('status' => 'failed', 'message' => 'Invalid credentials');
+        // Update error message for incorrect password
+        $response = array('status' => 'failed', 'message' => 'Invalid password');
         sendJsonResponse($response);
     }
 } else {
+    // Update error message for email not found
     $response = array('status' => 'failed', 'message' => 'Email not found');
     sendJsonResponse($response);
 }
