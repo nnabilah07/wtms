@@ -1,6 +1,6 @@
 # Worker Task Management System (WTMS)
 
-## INFORMATION
+## Information
 1. Matric Number: 298612
 2. Name: NURUL NABILAH BINTI MOHAMED MAHATHIR
    
@@ -38,6 +38,7 @@ WTMS is a Flutter-based mobile application that allows workers to manage tasks a
 - **Password Hashing**: SHA1 for secure password storage
 
 ## GitHub Link
-   git clone https://github.com/nnabilah07/wtms.git
+https://github.com/nnabilah07/wtms.git
 
-## YouTube Presentation Link
+## YouTube Presentation 
+YouTube Presentation Link:
