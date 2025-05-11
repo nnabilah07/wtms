@@ -26,9 +26,12 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color.fromARGB(255, 16, 7, 137), const Color.fromARGB(255, 178, 202, 238)],
+            colors: [
+              Color.fromARGB(255, 16, 7, 137),
+              Color.fromARGB(255, 178, 202, 238)
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -44,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 24, 
+                  fontSize: 24,
                 ),
               ),
               const SizedBox(height: 20),
@@ -81,17 +84,27 @@ class _SplashScreenState extends State<SplashScreen> {
           var jsondata = json.decode(response.body);
           if (jsondata['status'] == 'success') {
             Worker worker = Worker.fromJson(jsondata['data'][0]);
+
+            // Save login state and basic worker info
+           SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setBool('isLoggedIn', true);
+          await prefs.setString('workerId', worker.workerId.toString());
+          await prefs.setString('workerName', worker.workerFullName ?? '');
+
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => MainScreen(worker: worker)),
             );
           } else {
+            _showError("Auto-login failed. Proceeding as Guest.");
             _goAsGuest();
           }
         } else {
+          _showError("Server error. Proceeding as Guest.");
           _goAsGuest();
         }
       } catch (e) {
+        _showError("Connection error. Proceeding as Guest.");
         _goAsGuest();
       }
     } else {
@@ -112,5 +125,17 @@ class _SplashScreenState extends State<SplashScreen> {
       context,
       MaterialPageRoute(builder: (context) => MainScreen(worker: guest)),
     );
+  }
+
+  void _showError(String message) {
+    final messenger = ScaffoldMessenger.of(context);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    });
   }
 }

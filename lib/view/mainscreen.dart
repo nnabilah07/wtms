@@ -17,28 +17,28 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: null, // Removes the back button
         title: const Text(
           "WTMS: Worker Task Management System",
           style: TextStyle(
             color: Colors.white,
-            fontWeight: FontWeight.bold, 
+            fontWeight: FontWeight.bold,
           ),
         ),
         backgroundColor: const Color.fromARGB(255, 36, 52, 159),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()),
-              );
-            },
-            icon: const Icon(
-              Icons.exit_to_app,
-              color: Colors.white,
-            ),
-          ),
-        ],
+        actions: widget.worker.workerId == "0" // Check if workerId is "0"
+            ? [] // No action icon when no worker is logged in
+            : [
+                IconButton(
+                  onPressed: () {
+                    _showLogoutConfirmationDialog(context); // Show logout confirmation
+                  },
+                  icon: const Icon(
+                    Icons.exit_to_app,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
       ),
       body: Center(
         child: widget.worker.workerId == "0"
@@ -53,9 +53,41 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   const SizedBox(height: 10),
                   const Text(
-                    "Hi! Welcome to Worker Task Management System, Guest! Please register to proceed.",
+                    "Hi! Welcome to Worker Task Management System, Guest! Please choose an option to proceed.",
                     style: TextStyle(fontSize: 18, color: Colors.black),
                     textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const LoginScreen()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 36, 52, 159),
+                    ),
+                    child: const Text(
+                      "Log in",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 36, 52, 159),
+                    ),
+                    child: const Text(
+                      "Register",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               )
@@ -97,25 +129,57 @@ class _MainScreenState extends State<MainScreen> {
               ),
       ),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (widget.worker.workerId == "0") {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const RegisterScreen()),
-            );
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text("Feature to add new task or product is coming soon!"),
-            ));
-          }
-        },
-        backgroundColor: const Color.fromARGB(255, 36, 52, 159),
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
+      floatingActionButton: widget.worker.workerId == "0" // Check if worker is a guest
+          ? null // Hide the floating action button if worker is a guest
+          : FloatingActionButton(
+              onPressed: () {
+                if (widget.worker.workerId == "0") {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Feature to add new task or product is coming soon!"),
+                  ));
+                }
+              },
+              backgroundColor: const Color.fromARGB(255, 36, 52, 159),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+            ),
+    );
+  }
+
+  // Function to show a logout confirmation dialog
+  void _showLogoutConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Logout"),
+          content: const Text("Are you sure you want to log out?"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()), // Navigate to Login Screen
+                );
+              },
+              child: const Text("Logout"),
+            ),
+          ],
+        );
+      },
     );
   }
 }

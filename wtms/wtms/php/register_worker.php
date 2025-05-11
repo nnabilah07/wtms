@@ -27,7 +27,7 @@ $email = mysqli_real_escape_string($conn, $email);
 $phone = mysqli_real_escape_string($conn, $phone);
 $address = mysqli_real_escape_string($conn, $address);
 
-// Hash the password using sha1 (can replace with more secure hashing like password_hash)
+// Hash the password using sha1 
 $hashedPassword = sha1($password);
 
 // Check for required fields

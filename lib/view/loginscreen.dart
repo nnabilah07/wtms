@@ -6,7 +6,7 @@ import 'package:wtms/model/worker.dart';
 import 'package:wtms/myconfig.dart';
 import 'package:wtms/view/profilescreen.dart';
 import 'package:wtms/view/registerscreen.dart';
-import 'package:wtms/view/mainscreen.dart'; 
+import 'package:wtms/view/mainscreen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -119,10 +119,22 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  // Validation: Check if email format is valid
+  bool isValidEmail(String email) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  // Validation: Check if password is at least 6 characters long
+  bool isValidPassword(String password) {
+    return password.length >= 6;
+  }
+
   Future<void> loginWorker() async {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
+    // Validation: Check if fields are empty
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Please fill all fields"),
@@ -131,6 +143,25 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
+    // Validation: Check if email format is valid
+    if (!isValidEmail(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Invalid email format"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+
+    // Validation: Check if password is at least 6 characters long
+    if (!isValidPassword(password)) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Password must be at least 6 characters"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+
+    // If validations pass, make the HTTP request
     try {
       var response = await http.post(Uri.parse("${MyConfig.myurl}/wtms/wtms/php/login_worker.php"),
         body: {
