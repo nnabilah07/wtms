@@ -99,7 +99,7 @@ class _MainScreenState extends State<MainScreen> {
                     style: TextStyle(
                       fontSize: 24,
                       color: Colors.blue.shade800,
-                      fontWeight: FontWeight.bold, // Set text to bold
+                      fontWeight: FontWeight.bold, 
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -118,11 +118,11 @@ class _MainScreenState extends State<MainScreen> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue.shade900, // Background color
+                      backgroundColor: Colors.blue.shade900, 
                     ),
                     child: const Text(
                       "View Profile",
-                      style: TextStyle(color: Colors.white), // Text color set to white
+                      style: TextStyle(color: Colors.white), 
                     ),
                   ),
                 ],

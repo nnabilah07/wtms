@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wtms/view/loginscreen.dart';
-import 'package:wtms/view/mainscreen.dart';  // Import MainScreen
+import 'package:wtms/view/mainscreen.dart';  
 import 'package:wtms/model/worker.dart';
 
 class ProfileScreen extends StatelessWidget {
