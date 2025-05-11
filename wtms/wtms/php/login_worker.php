@@ -45,8 +45,7 @@ if ($result->num_rows > 0) {
         );
         sendJsonResponse($response);
     } else {
-        // Update error message for incorrect password
-        $response = array('status' => 'failed', 'message' => 'Invalid password');
+        $response = array('status' => 'failed', 'message' => 'Invalid credentials');
         sendJsonResponse($response);
     }
 } else {
