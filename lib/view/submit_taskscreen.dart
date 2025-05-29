@@ -43,40 +43,45 @@ class _SubmitTaskScreenState extends State<SubmitTaskScreen> {
         'submission_text': _submissionController.text.trim(),
       };
 
-      final encodedJson = jsonEncode(requestData);
-
-      debugPrint("Sending to: $url");
-      debugPrint("Headers: ${{'Content-Type': 'application/json'}}");
-      debugPrint("Request Data Map: $requestData");
-      debugPrint("Encoded JSON: $encodedJson");
+      debugPrint("Submitting to: $url");
+      debugPrint("Request data: $requestData");
 
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
-        body: encodedJson,
+        body: jsonEncode(requestData),
       ).timeout(const Duration(seconds: 10));
 
-      debugPrint("Response: ${response.statusCode} - ${response.body}");
+      debugPrint("Response status: ${response.statusCode}");
+      debugPrint("Response body: ${response.body}");
 
-      final responseData = json.decode(response.body);
-
-      if (response.statusCode == 200 && responseData['status'] == 'success') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Submission successful!')),
-        );
-        Navigator.pop(context, true);
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        if (responseData['status'] == 'success') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Submission successful!')),
+          );
+          Navigator.pop(context, true);
+        } else {
+          throw Exception(responseData['message'] ?? 'Submission failed');
+        }
       } else {
-        throw Exception(responseData['message'] ?? 'Submission failed with status ${response.statusCode}');
+        throw Exception('Server responded with status ${response.statusCode}');
       }
     } on TimeoutException {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Request timed out. Check your connection.')),
       );
-    } catch (e) {
-      debugPrint("Full error: $e");
+    } on http.ClientException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Network Error: ${e.toString()}')),
+        SnackBar(content: Text('Network error: ${e.message}')),
       );
+      debugPrint("Network error details: $e");
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.toString()}')),
+      );
+      debugPrint("Error details: $e");
     } finally {
       setState(() => _isSubmitting = false);
     }
@@ -126,10 +131,14 @@ class _SubmitTaskScreenState extends State<SubmitTaskScreen> {
               onPressed: _isSubmitting ? null : submitCompletion,
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
+                backgroundColor: const Color.fromARGB(255, 36, 52, 159),
               ),
               child: _isSubmitting
                   ? const CircularProgressIndicator()
-                  : const Text('Submit Completion'),
+                  : const Text(
+                      'Submit Completion',
+                      style: TextStyle(color: Colors.white),
+                    ),
             ),
           ],
         ),
