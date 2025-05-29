@@ -7,7 +7,7 @@
 ## Description 📝
 WTMS is a **Flutter-based mobile application** that allows workers to manage tasks and profiles effectively. The app provides features such as worker registration, login, and profile management. It connects to a backend **PHP server** with a **MySQL database** for data management.
 
-## Features
+## Features  🔧  
 ### ✅ Phase 1
 - **Worker Registration:** Workers can register by providing full name, email, password, phone number, and address. This data is sent to the backend via an HTTP POST request.
 - **Worker Login:** Users can log in using their email and password. On successful login, the app retrieves and displays the worker's full profile.
@@ -45,7 +45,7 @@ WTMS is a **Flutter-based mobile application** that allows workers to manage tas
 - **Fields:** Pre-filled (read-only) task title, a text input: “What did you complete?”, and a submit button.  
 - **Function:** Sends the submission to the backend.  
 
-## Tech Stack
+## Tech Stack 🛠️
 - **Frontend**: Flutter
 - **Backend**: PHP, MySQL
 - **State Management**: SharedPreferences for session management.
