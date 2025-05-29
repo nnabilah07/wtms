@@ -41,4 +41,4 @@ WTMS is a Flutter-based mobile application that allows workers to manage tasks a
 https://github.com/nnabilah07/wtms.git
 
 ## YouTube Presentation 
-YouTube Presentation Link:
+YouTube Presentation Link: https://youtu.be/lvjNx_6U49M
