@@ -75,8 +75,8 @@ class _SplashScreenState extends State<SplashScreen> {
         final response = await http.post(
           Uri.parse("${MyConfig.myurl}/wtms/wtms/php/login_worker.php"),
           body: {
-            "worker_email": email,
-            "worker_password": password,
+            "email": email,
+            "password": password,
           },
         );
 
