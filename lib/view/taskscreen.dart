@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:wtms/myconfig.dart';
 import 'package:wtms/model/task.dart';
-import 'package:wtms/view/submit_taskscreen.dart'; 
+import 'package:wtms/view/submit_taskscreen.dart';
 
 class TaskScreen extends StatefulWidget {
   final int workerId;
@@ -135,7 +136,9 @@ class _TaskScreenState extends State<TaskScreen> {
                         children: [
                           Icon(Icons.inbox, size: 64, color: Colors.grey),
                           SizedBox(height: 10),
-                          Text("No tasks assigned", style: TextStyle(fontSize: 16)),
+                          Text("No tasks assigned", 
+                          style: TextStyle(fontSize: 16)
+                          ),
                         ],
                       ),
                     )
@@ -151,7 +154,7 @@ class _TaskScreenState extends State<TaskScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            color: const Color.fromARGB(255, 192, 231, 255),
+                            color: const Color.fromARGB(255, 241, 247, 255),
                             child: ListTile(
                               contentPadding: const EdgeInsets.all(12),
                               onTap: () {
@@ -164,7 +167,7 @@ class _TaskScreenState extends State<TaskScreen> {
                                       workerId: widget.workerId,
                                     ),
                                   ),
-                                ).then((_) => fetchTasks()); // Refresh after submission
+                                ).then((_) => fetchTasks());
                               },
                               title: Text(
                                 task.title,
@@ -176,24 +179,50 @@ class _TaskScreenState extends State<TaskScreen> {
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const SizedBox(height: 5),
-                                  Text(task.description),
-                                  const SizedBox(height: 5),
-                                  Text("Due: ${task.dueDate}"),
-                                ],
-                              ),
-                              trailing: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text("Status"),
-                                  Text(
-                                    task.status,
-                                    style: TextStyle(
-                                      color: _getStatusColor(task.status),
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.description, size: 18, color: Colors.black54),
+                                      const SizedBox(width: 6),
+                                      Expanded(
+                                        child: Text(
+                                          task.description,
+                                          style: const TextStyle(fontSize: 14, color: Colors.black87),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.calendar_today, size: 18, color: Colors.black54),
+                                      const SizedBox(width: 6),
+                                      Text(
+                                        "Due Date: ${task.dueDate}",
+                                        style: const TextStyle(fontSize: 14, color: Colors.black87),
+                                      ),
+                                    ],
                                   ),
                                 ],
+                              ),
+                              trailing: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: _getStatusColor(task.status).withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                    color: _getStatusColor(task.status),
+                                    width: 1.2,
+                                  ),
+                                ),
+                                child: Text(
+                                  task.status.toUpperCase(),
+                                  style: TextStyle(
+                                    color: _getStatusColor(task.status),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                  ),
+                                ),
                               ),
                             ),
                           );

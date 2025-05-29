@@ -114,16 +114,25 @@ class _SubmitTaskScreenState extends State<SubmitTaskScreen> {
           children: [
             Text(
               'Task: ${widget.taskTitle}',
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 20),
+            const Text(
+              'What did you complete?',
+              style: TextStyle(
+                fontSize: 16,
+                //fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
             TextField(
               controller: _submissionController,
               maxLines: 5,
               decoration: const InputDecoration(
                 labelText: 'Completion Details',
                 border: OutlineInputBorder(),
-                hintText: 'Describe what you completed...',
               ),
             ),
             const SizedBox(height: 20),

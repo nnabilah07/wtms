@@ -112,7 +112,7 @@ class _MainScreenState extends State<MainScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Welcome ${widget.worker.workerFullName}",
+          "Hi, Welcome ${widget.worker.workerFullName}!",
           style: TextStyle(
             fontSize: 24,
             color: Colors.blue.shade800,
