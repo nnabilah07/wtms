@@ -1,16 +1,11 @@
 # Worker Task Management System (WTMS)
----
 
 ## Information
 1. Matric Number: 298612
 2. Name: NURUL NABILAH BINTI MOHAMED MAHATHIR
 
----
-
 ## Description 📝
 WTMS is a **Flutter-based mobile application** that allows workers to manage tasks and profiles effectively. The app provides features such as worker registration, login, and profile management. It connects to a backend **PHP server** with a **MySQL database** for data management.
-
----
 
 ## Features
 ### ✅ Phase 1
@@ -26,9 +21,7 @@ WTMS is a **Flutter-based mobile application** that allows workers to manage tas
   - Tasks display: task ID, title, description, date assigned, due date, and status.
 - **Work Completion Upload:**
   - Workers select a task and upload a completion description.
-  - Submission is stored in the `tbl_submissions` table via backend API.
-    
---- 
+  - Submission is stored in the `tbl_submissions` table via backend API. 
 
 ## Screens 📲  
 
@@ -50,9 +43,7 @@ WTMS is a **Flutter-based mobile application** that allows workers to manage tas
 
 ### 5. Submit Completion Screen *(Phase 2)*
 - **Fields:** Pre-filled (read-only) task title, a text input: “What did you complete?”, and a submit button.  
-- **Function:** Sends the submission to the backend.
-
----  
+- **Function:** Sends the submission to the backend.  
 
 ## Tech Stack
 - **Frontend**: Flutter
@@ -60,12 +51,8 @@ WTMS is a **Flutter-based mobile application** that allows workers to manage tas
 - **State Management**: SharedPreferences for session management.
 - **Password Hashing**: SHA1 for secure password storage
 
----
-
 ## GitHub Link
 https://github.com/nnabilah07/wtms.git
-
----
 
 ## YouTube Presentation 
 Phase 1: YouTube Presentation Link: https://youtu.be/lvjNx_6U49M
