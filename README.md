@@ -29,7 +29,7 @@ WTMS is a **Flutter-based mobile application** that allows workers to manage tas
 
 ## Screens 📲  
 
-### 1. Registration Screen
+### 1. Register Screen
 - **Fields:** Full Name, Email, Password (hidden), Phone Number, Address  
 - **Validation:** All fields required, valid email format, password ≥ 6 characters.
 
