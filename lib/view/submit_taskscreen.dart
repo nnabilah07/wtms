@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:wtms/myconfig.dart';
 
 class SubmitTaskScreen extends StatefulWidget {
@@ -46,11 +46,13 @@ class _SubmitTaskScreenState extends State<SubmitTaskScreen> {
       debugPrint("Submitting to: $url");
       debugPrint("Request data: $requestData");
 
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(requestData),
-      ).timeout(const Duration(seconds: 10));
+      final response = await http
+          .post(
+            url,
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode(requestData),
+          )
+          .timeout(const Duration(seconds: 10));
 
       debugPrint("Response status: ${response.statusCode}");
       debugPrint("Response body: ${response.body}");
@@ -76,12 +78,10 @@ class _SubmitTaskScreenState extends State<SubmitTaskScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Network error: ${e.message}')),
       );
-      debugPrint("Network error details: $e");
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: ${e.toString()}')),
       );
-      debugPrint("Error details: $e");
     } finally {
       setState(() => _isSubmitting = false);
     }

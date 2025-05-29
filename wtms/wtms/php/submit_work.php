@@ -4,6 +4,12 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -13,9 +19,8 @@ $response = ['status' => 'error', 'message' => ''];
 
 try {
     $rawInput = file_get_contents('php://input');
-
-    // Log raw input early
     file_put_contents('debug.log', "RAW JSON INPUT: $rawInput\n", FILE_APPEND);
+    file_put_contents('debug.log', "REQUEST METHOD: {$_SERVER['REQUEST_METHOD']}\n", FILE_APPEND);
 
     if (!$rawInput) {
         throw new Exception("No JSON input received", 400);
@@ -27,7 +32,6 @@ try {
         throw new Exception("Invalid JSON input: " . json_last_error_msg(), 400);
     }
 
-    // Continue as before...
     $required = ['work_id', 'worker_id', 'submission_text'];
     foreach ($required as $field) {
         if (empty($input[$field])) {
@@ -64,6 +68,7 @@ try {
 } finally {
     if (isset($stmt)) $stmt->close();
     $conn->close();
-    file_put_contents('response.log', print_r($response, true));
+    file_put_contents('response.log', print_r($response, true), FILE_APPEND);
     echo json_encode($response);
 }
+?>
