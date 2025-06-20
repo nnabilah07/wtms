@@ -12,9 +12,9 @@ WTMS is a Flutter-based mobile application designed to streamline how workers ma
 
 ## Features  🔧  
 ### ✅ Phase 1
-- **Worker Registration:** Workers can register by providing full name, email, password, phone number, and address. This data is sent to the backend via an HTTP POST request.
+- **Worker Registration:** Workers can register by providing full name, username, email, password, phone number, and address. This data is sent to the backend via an HTTP POST request.
 - **Worker Login:** Users can log in using their email and password. On successful login, the app retrieves and displays the worker's full profile.
-- **Profile Management:** Workers can view their personal information (name, email, phone, address).
+- **Profile Management:** Workers can view their personal information (username, name, email, phone, address).
 - **Session Persistence:** Login state is maintained using `SharedPreferences`.
 - **Secure Password Storage:** Passwords are hashed with SHA1 before storing them in the database.
 
@@ -38,9 +38,9 @@ WTMS is a Flutter-based mobile application designed to streamline how workers ma
   - A confirmation prompt is shown before saving.
 
 - **🧑 Profile Update**
-  - Displays the worker's current info (name, email, phone, etc.).
+  - Displays the worker's current info (username, name, email, phone, and address.).
   - Allows editing and updating the information, except for the username.
-  - Changes are saved to `tbl_users`.
+  - Changes are saved to `workers`.
 
 - **🧭 Improved Navigation**
   - Enhanced navigation using `TabBar`, `BottomNavigationBar`, and a sidebar drawer.
