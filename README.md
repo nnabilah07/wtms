@@ -7,14 +7,14 @@
 
 
 ## Description 📝
-WTMS is a **Flutter-based mobile application** that allows workers to manage tasks and profiles effectively. The app provides features such as worker registration, login, and profile management. It connects to a backend **PHP server** with a **MySQL database** for data management.
+WTMS is a Flutter-based mobile application designed to streamline how workers manage their tasks and personal information. It features secure user authentication, task tracking, submission management, and profile control. WTMS communicates with a backend PHP server connected to a MySQL database.
 
 
 ## Features  🔧  
 ### ✅ Phase 1
 - **Worker Registration:** Workers can register by providing full name, email, password, phone number, and address. This data is sent to the backend via an HTTP POST request.
 - **Worker Login:** Users can log in using their email and password. On successful login, the app retrieves and displays the worker's full profile.
-- **Profile Management:** Workers can view and manage their personal information (name, email, phone, address).
+- **Profile Management:** Workers can view their personal information (name, email, phone, address).
 - **Session Persistence:** Login state is maintained using `SharedPreferences`.
 - **Secure Password Storage:** Passwords are hashed with SHA1 before storing them in the database.
 
@@ -26,11 +26,36 @@ WTMS is a **Flutter-based mobile application** that allows workers to manage tas
   - Workers select a task and upload a completion description.
   - Submission is stored in the `tbl_submissions` table via backend API. 
 
+### 🚀 Final Phase: Enhanced Functionality
+- **📂 Submission History:**
+- Displays a list of all past submissions by the logged-in worker.
+- Shows task title, submission date, and a short preview of the submission text.
+- Optionally allows expanding to view the full submission.
+
+-**✏️ Edit Submission**
+- Workers can tap on a submission from the history list to edit it.
+- The updated text will overwrite the existing entry in `tbl_submissions`.
+- A confirmation prompt is shown before saving.
+
+-**🧑 Profile Update**
+- Displays the worker's current info (name, email, phone, etc.).
+- Allows editing and updating the information, except for the username.
+- Changes are saved to `tbl_users`.
+
+-**🧭 Improved Navigation**
+- Enhanced navigation using `TabBar`, `BottomNavigationBar`, and a sidebar drawer.
+- Includes:
+  - **Tasks:** Task list and submission screen
+  - **History:** View and edit past submissions
+  - **Profile:** View and update profile details
+
+---
+
 
 ## Screens 📲  
 
 ### 1. Register Screen
-- **Fields:** Full Name, Email, Password (hidden), Phone Number, Address  
+- **Fields:** Full Name, Username, Email, Password (hidden), Phone Number, Address  
 - **Validation:** All fields required, valid email format, password ≥ 6 characters.
 
 ### 2. Login Screen
@@ -38,24 +63,44 @@ WTMS is a **Flutter-based mobile application** that allows workers to manage tas
 - **Success:** Redirects to Profile and Task List.
 
 ### 3. Profile Screen
-- **Displays:** Worker ID, Full Name, Email, Phone, Address  
-- **Features:** Logout button.
+- **Displays:** Username *(final phase)*, Full Name, Email, Phone Number, Address  
+- **Features:** Logout button, Edit Profile option
 
-### 4. Task Screen *(Phase 2)*
-- **Displays:** List of tasks assigned to the logged-in worker.  
-- **Shows:** Title, description, due date, status.
+### 4. Task Screen
+- **Displays:** Assigned tasks with title, description, due date, and status  
+- **Tap to Submit:** Leads to submission screen
 
-### 5. Submit Completion Screen *(Phase 2)*
-- **Fields:** Pre-filled (read-only) task title, a text input: “What did you complete?”, and a submit button.  
-- **Function:** Sends the submission to the backend.  
+### 5. Submit Completion Screen
+- **Fields:** Read-only task title, text input for completion description, submit button  
+- **Function:** Sends submission to backend
 
+### 6. Submission History Screen
+- **Displays:** List of submissions  
+- **Tappable:** To open and edit previous submission
+
+---
 
 ## Tech Stack 🛠️
-- **Frontend**: Flutter
-- **Backend**: PHP, MySQL
-- **State Management**: SharedPreferences for session management.
-- **Password Hashing**: SHA1 for secure password storage
 
+| Layer       | Technology             |
+|-------------|------------------------|
+| Frontend    | Flutter                |
+| Backend     | PHP                    |
+| Database    | MySQL                  |
+| State Mgmt  | SharedPreferences      |
+| Auth        | Custom (Email/Password)|
+| Security    | SHA1 Password Hashing  |
+
+---
+
+## 📡 Backend API (PHP)
+
+| API Endpoint           | Description |
+|------------------------|-------------|
+| `get_submissions.php`  | Input: `worker_id` → Returns list of submissions joined with task title |
+| `edit_submission.php`  | Input: `submission_id`, `updated_text` → Updates submission in `tbl_submissions` |
+| `get_profile.php`      | Input: `worker_id` → Returns worker profile info |
+| `update_profile.php`   | Input: `worker_id`, `name`, `email`, `phone`, etc. → Updates profile info in `workers` |
 
 ## GitHub Link
 https://github.com/nnabilah07/wtms.git
@@ -65,3 +110,5 @@ https://github.com/nnabilah07/wtms.git
 Phase 1: https://youtu.be/lvjNx_6U49M
 
 Phase 2: https://youtu.be/P3VvzYD8zk0 
+
+Phase 3: https://youtu.be/XCXu88vh3ZM
