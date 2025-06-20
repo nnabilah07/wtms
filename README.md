@@ -28,26 +28,26 @@ WTMS is a Flutter-based mobile application designed to streamline how workers ma
 
 ### 🚀 Final Phase: Enhanced Functionality
 - **📂 Submission History:**
-- Displays a list of all past submissions by the logged-in worker.
-- Shows task title, submission date, and a short preview of the submission text.
-- Optionally allows expanding to view the full submission.
+  - Displays a list of all past submissions by the logged-in worker.
+  - Shows task title, submission date, and a short preview of the submission text.
+  - Optionally allows expanding to view the full submission.
 
 -**✏️ Edit Submission**
-- Workers can tap on a submission from the history list to edit it.
-- The updated text will overwrite the existing entry in `tbl_submissions`.
-- A confirmation prompt is shown before saving.
+  - Workers can tap on a submission from the history list to edit it.
+  - The updated text will overwrite the existing entry in `tbl_submissions`.
+  - A confirmation prompt is shown before saving.
 
 -**🧑 Profile Update**
-- Displays the worker's current info (name, email, phone, etc.).
-- Allows editing and updating the information, except for the username.
-- Changes are saved to `tbl_users`.
+  - Displays the worker's current info (name, email, phone, etc.).
+  - Allows editing and updating the information, except for the username.
+  - Changes are saved to `tbl_users`.
 
 -**🧭 Improved Navigation**
-- Enhanced navigation using `TabBar`, `BottomNavigationBar`, and a sidebar drawer.
-- Includes:
-  - **Tasks:** Task list and submission screen
-  - **History:** View and edit past submissions
-  - **Profile:** View and update profile details
+  - Enhanced navigation using `TabBar`, `BottomNavigationBar`, and a sidebar drawer.
+  - Includes:
+    - **Tasks:** Task list and submission screen
+    - **History:** View and edit past submissions
+    - **Profile:** View and update profile details
 
 ---
 
