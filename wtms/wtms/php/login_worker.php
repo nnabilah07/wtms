@@ -1,9 +1,12 @@
 <?php
 error_reporting(0); // Disable error reporting for security
 header("Access-Control-Allow-Origin: *"); // Allow requests from all origins
-header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Content-Type: application/json; charset=UTF-8");
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 include_once("dbconnect.php");
 

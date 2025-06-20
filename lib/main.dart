@@ -13,7 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'WORKER TASK MANAGEMENT SYSTEM',
-      theme: ThemeData(primarySwatch: Colors.indigo),
+      theme: ThemeData(
+        primarySwatch: Colors.indigo,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 36, 52, 159),
+        ),
+      ),
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );

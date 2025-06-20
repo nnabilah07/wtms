@@ -1,6 +1,7 @@
 class Worker {
   String? workerId;
   String? workerFullName;
+  String? workerUsername;
   String? workerEmail;
   String? workerPassword;
   String? workerPhone;
@@ -8,6 +9,7 @@ class Worker {
 
   Worker({
     this.workerId,
+    this.workerUsername,
     this.workerFullName,
     this.workerEmail,
     this.workerPassword,
@@ -19,6 +21,7 @@ class Worker {
   Worker.fromJson(Map<String, dynamic> json) {
     workerId = json['id'];
     workerFullName = json['full_name'];
+    workerUsername = json['username'];
     workerEmail = json['email'];
     workerPassword = json['password'];
     workerPhone = json['phone'];
@@ -30,6 +33,7 @@ class Worker {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = workerId;
     data['full_name'] = workerFullName; 
+    data['username'] = workerUsername;
     data['email'] = workerEmail;
     data['password'] = workerPassword;
     data['phone'] = workerPhone;

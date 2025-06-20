@@ -29,8 +29,8 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 16, 7, 137),
-              Color.fromARGB(255, 178, 202, 238)
+              Color(0xFF1A237E), // Deep indigo
+              Color(0xFF512DA8), // Purple shade
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -40,21 +40,42 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("assets/images/main_image.jpeg", scale: 2),
-              const SizedBox(height: 10),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black45,
+                      blurRadius: 12,
+                      offset: Offset(0, 6),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset(
+                    "assets/images/main_image.jpeg",
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
               const Text(
                 "WTMS",
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 24,
+                  fontSize: 28,
+                  letterSpacing: 1.5,
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               const CircularProgressIndicator(
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.white24,
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  Color.fromARGB(255, 74, 179, 236),
+                  Colors.cyanAccent,
                 ),
               ),
             ],
@@ -85,11 +106,10 @@ class _SplashScreenState extends State<SplashScreen> {
           if (jsondata['status'] == 'success') {
             Worker worker = Worker.fromJson(jsondata['data'][0]);
 
-            // Save login state and basic worker info
-           SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setBool('isLoggedIn', true);
-          await prefs.setString('workerId', worker.workerId.toString());
-          await prefs.setString('workerName', worker.workerFullName ?? '');
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setBool('isLoggedIn', true);
+            await prefs.setString('workerId', worker.workerId.toString());
+            await prefs.setString('workerName', worker.workerFullName ?? '');
 
             Navigator.pushReplacement(
               context,
