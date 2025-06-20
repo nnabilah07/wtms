@@ -43,7 +43,7 @@ WTMS is a Flutter-based mobile application designed to streamline how workers ma
   - Changes are saved to `workers`.
 
 - **🧭 Improved Navigation**
-  - Enhanced navigation using `TabBar`, `BottomNavigationBar`, and a sidebar drawer.
+  - Enhanced navigation using `TabBar`, `BottomNavigationBar`, and a `sidebar drawer`.
   - Includes:
     - **Tasks:** Task list and submission screen
     - **History:** View and edit past submissions
