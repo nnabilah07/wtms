@@ -32,24 +32,22 @@ WTMS is a Flutter-based mobile application designed to streamline how workers ma
   - Shows task title, submission date, and a short preview of the submission text.
   - Optionally allows expanding to view the full submission.
 
--**✏️ Edit Submission**
+- **✏️ Edit Submission**
   - Workers can tap on a submission from the history list to edit it.
   - The updated text will overwrite the existing entry in `tbl_submissions`.
   - A confirmation prompt is shown before saving.
 
--**🧑 Profile Update**
+- **🧑 Profile Update**
   - Displays the worker's current info (name, email, phone, etc.).
   - Allows editing and updating the information, except for the username.
   - Changes are saved to `tbl_users`.
 
--**🧭 Improved Navigation**
+- **🧭 Improved Navigation**
   - Enhanced navigation using `TabBar`, `BottomNavigationBar`, and a sidebar drawer.
   - Includes:
     - **Tasks:** Task list and submission screen
     - **History:** View and edit past submissions
     - **Profile:** View and update profile details
-
----
 
 
 ## Screens 📲  
@@ -78,7 +76,6 @@ WTMS is a Flutter-based mobile application designed to streamline how workers ma
 - **Displays:** List of submissions  
 - **Tappable:** To open and edit previous submission
 
----
 
 ## Tech Stack 🛠️
 
@@ -91,7 +88,6 @@ WTMS is a Flutter-based mobile application designed to streamline how workers ma
 | Auth        | Custom (Email/Password)|
 | Security    | SHA1 Password Hashing  |
 
----
 
 ## 📡 Backend API (PHP)
 
